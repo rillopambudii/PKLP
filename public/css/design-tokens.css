@@ -1,0 +1,203 @@
+/* ============================================================
+   PKLP Design System — Design Tokens
+   Bentuk EKSEKUSI dari design-system/MASTER.md (§2, §3, §4, §10).
+   Ini SATU SUMBER token. Ubah di sini (selaras MASTER.md) →
+   styleguide & komponen yang memakai class .ds-* ikut berubah.
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+/* ---------- LIGHT (default) ---------- */
+:root {
+  /* surfaces & text */
+  --color-bg:#F1F5F9;
+  --color-surface:#FFFFFF;
+  --color-surface-2:#F8FAFC;
+  --color-border:#E2E8F0;
+  --color-text:#0F172A;
+  --color-text-muted:#475569;
+  --color-text-subtle:#94A3B8;
+
+  /* brand / primary scale */
+  --color-primary-50:#EEEEFA;
+  --color-primary-100:#DCDCF4;
+  --color-primary-200:#BBBAEA;
+  --color-primary-300:#9897DC;
+  --color-primary-400:#6A69C6;
+  --color-primary-500:#4B4AB0;
+  --color-primary-600:#343399;
+  --color-primary-700:#2B2A80;
+  --color-primary-800:#232267;
+  --color-primary-900:#1A1A4D;
+  --color-primary:var(--color-primary-600);
+  --color-on-primary:#FFFFFF;
+  --color-accent:#E11D27;
+
+  /* status */
+  --color-success:#16A34A;
+  --color-warning:#F59E0B;
+  --color-danger:#DC2626;
+  --color-info:#0EA5E9;
+
+  /* radius */
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:16px;
+  --radius-full:9999px;
+
+  /* elevation */
+  --shadow-e1:0 1px 2px rgba(15,23,42,.06);
+  --shadow-e2:0 4px 12px rgba(15,23,42,.08);
+  --shadow-e3:0 12px 28px rgba(15,23,42,.12);
+
+  /* spacing scale (4/8) */
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
+  --space-6:24px; --space-8:32px; --space-12:48px; --space-16:64px;
+
+  /* type */
+  --font-sans:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ---------- DARK ---------- */
+:root.dark, [data-theme="dark"] {
+  --color-bg:#0F172A;
+  --color-surface:#1E293B;
+  --color-surface-2:#243044;
+  --color-border:#334155;
+  --color-text:#F1F5F9;
+  --color-text-muted:#CBD5E1;
+  --color-text-subtle:#94A3B8;
+
+  --color-primary:#9897DC;        /* indigo-300 untuk teks/link di atas gelap */
+  --color-primary-600:#4B4AB0;    /* bg tombol primary di dark */
+  --color-primary-700:#343399;
+  --color-on-primary:#FFFFFF;
+  --color-accent:#F0464E;
+
+  --color-success:#22C55E;
+  --color-warning:#FBBF24;
+  --color-danger:#F87171;
+  --color-info:#38BDF8;
+
+  --shadow-e1:0 1px 2px rgba(0,0,0,.4);
+  --shadow-e2:0 4px 12px rgba(0,0,0,.45);
+  --shadow-e3:0 12px 28px rgba(0,0,0,.5);
+}
+
+/* ============================================================
+   Base + reusable component classes (semua memakai token)
+   ============================================================ */
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--color-bg); color:var(--color-text);
+  font-family:var(--font-sans); line-height:1.5;
+  -webkit-font-smoothing:antialiased; transition:background .2s ease,color .2s ease;
+}
+.ds-mono{ font-family:var(--font-mono); font-feature-settings:"tnum"; }
+
+/* A11y: focus ring keyboard global (fallback bila komponen tak set sendiri) */
+:focus-visible{ outline:2px solid var(--color-primary); outline-offset:2px; }
+
+/* A11y: hormati prefers-reduced-motion (MASTER §6 reduced-motion) */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* Typography scale (MASTER §3) */
+.ds-h1{ font-size:1.875rem; font-weight:700; line-height:1.25; margin:0; }
+.ds-h2{ font-size:1.5rem;   font-weight:600; line-height:1.3;  margin:0; }
+.ds-h3{ font-size:1.125rem; font-weight:600; line-height:1.4;  margin:0; }
+.ds-body{ font-size:1rem;   font-weight:400; line-height:1.5; }
+.ds-label{ font-size:.875rem; font-weight:500; line-height:1.45; }
+.ds-caption{ font-size:.75rem; font-weight:500; line-height:1.4; color:var(--color-text-muted); }
+
+/* Card (MASTER §5) */
+.ds-card{
+  background:var(--color-surface); border:1px solid var(--color-border);
+  border-radius:var(--radius-md); box-shadow:var(--shadow-e1);
+  padding:var(--space-6);
+}
+
+/* Buttons (MASTER §5) */
+.ds-btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:44px; padding:0 16px; border-radius:var(--radius-sm);
+  font-family:var(--font-sans); font-size:.95rem; font-weight:600;
+  border:1px solid transparent; cursor:pointer;
+  transition:background .15s ease, box-shadow .15s ease, opacity .15s ease, transform .05s ease;
+}
+.ds-btn:focus-visible{ outline:3px solid var(--color-primary-300); outline-offset:2px; }
+.ds-btn:active{ transform:translateY(1px); }
+.ds-btn--primary{ background:var(--color-primary-600); color:var(--color-on-primary); }
+.ds-btn--primary:hover{ background:var(--color-primary-700); }
+.ds-btn--secondary{ background:var(--color-surface); color:var(--color-text); border-color:var(--color-border); }
+.ds-btn--secondary:hover{ background:var(--color-surface-2); }
+.ds-btn--danger{ background:var(--color-danger); color:#fff; }
+.ds-btn--danger:hover{ filter:brightness(.92); }
+.ds-btn--ghost{ background:transparent; color:var(--color-primary); }
+.ds-btn--ghost:hover{ background:var(--color-surface-2); }
+.ds-btn:disabled, .ds-btn[disabled]{ opacity:.5; cursor:not-allowed; }
+
+/* Badges / status (MASTER §5) */
+.ds-badge{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:2px 10px; border-radius:var(--radius-full);
+  font-size:.75rem; font-weight:600; line-height:1.6;
+}
+.ds-badge::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+/* teks badge pakai nuansa lebih gelap agar lolos kontras AA di atas tint terang */
+.ds-badge--success{ color:#15803D; background:color-mix(in srgb, var(--color-success) 14%, transparent); }
+.ds-badge--warning{ color:#B45309; background:color-mix(in srgb, var(--color-warning) 18%, transparent); }
+.ds-badge--danger { color:#B91C1C; background:color-mix(in srgb, var(--color-danger) 14%, transparent); }
+.ds-badge--info   { color:#0369A1; background:color-mix(in srgb, var(--color-info) 14%, transparent); }
+[data-theme="dark"] .ds-badge--success{ color:#86EFAC; }
+[data-theme="dark"] .ds-badge--warning{ color:#FCD34D; }
+[data-theme="dark"] .ds-badge--danger { color:#FCA5A5; }
+[data-theme="dark"] .ds-badge--info   { color:#7DD3FC; }
+
+/* Form (MASTER §5) */
+.ds-field{ display:flex; flex-direction:column; gap:6px; }
+.ds-input{
+  min-height:44px; padding:0 12px; font-size:1rem; font-family:var(--font-sans);
+  background:var(--color-surface); color:var(--color-text);
+  border:1px solid var(--color-border); border-radius:var(--radius-sm);
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+.ds-input::placeholder{ color:var(--color-text-subtle); }
+.ds-input:focus{ outline:none; border-color:var(--color-primary); box-shadow:0 0 0 3px var(--color-primary-300); }
+.ds-input--error{ border-color:var(--color-danger); }
+.ds-help{ font-size:.8rem; color:var(--color-text-muted); }
+.ds-error{ font-size:.8rem; color:var(--color-danger); }
+.ds-req{ color:var(--color-danger); }
+
+/* Table (MASTER §5) */
+.ds-table{ width:100%; border-collapse:collapse; font-size:.9rem; }
+.ds-table th{
+  text-align:left; padding:10px 14px; background:var(--color-surface-2);
+  color:var(--color-text-muted); font-size:.72rem; font-weight:600;
+  text-transform:uppercase; letter-spacing:.05em; border-bottom:1px solid var(--color-border);
+}
+.ds-table td{ padding:12px 14px; border-bottom:1px solid var(--color-border); }
+.ds-table tbody tr:hover{ background:var(--color-surface-2); }
+.ds-num{ text-align:right; font-family:var(--font-mono); }
+
+/* ============================================================
+   Angka tabel rapi di SEMUA modul (MASTER §6 number-tabular).
+   Tabular figures = lebar tiap digit sama → angka sejajar &
+   anti layout-shift, tanpa memaksa kolom teks jadi monospace.
+   Berlaku untuk tabel Bootstrap (admin AdminLTE + publik) & .ds-table.
+   ============================================================ */
+.table, .ds-table { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+/* sel yang khusus angka: rata kanan + mono (opt-in via class .num atau .text-right) */
+.table td.num, .table td.text-right, .table th.text-right {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum";
+}

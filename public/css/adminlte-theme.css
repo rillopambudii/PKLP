@@ -1,0 +1,346 @@
+/* ============================================================
+   PKLP — AdminLTE/Bootstrap Theme Override (Fase 1)
+   Memetakan warna & gaya AdminLTE 3 (Bootstrap 4) ke design token
+   (public/css/design-tokens.css → MASTER.md).
+   Dimuat SETELAH adminlte.min.css via plugin "DesignSystem".
+   Scope: LIGHT mode (dark menyusul di Fase 3).
+   ============================================================ */
+
+/* ---------- Typografi global ---------- */
+body,
+.wrapper,
+.nav,
+.btn,
+.form-control,
+.custom-select,
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-sans);
+}
+.text-monospace, .ds-mono, td.text-right, .small-box .inner h3 {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum";
+}
+
+/* ---------- Surface halaman ---------- */
+.content-wrapper { background-color: var(--color-bg); }
+body, .wrapper { color: var(--color-text); }
+
+/* ---------- Brand: Primary ---------- */
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-700); }
+
+.btn-primary {
+    background-color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+    color: var(--color-on-primary);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:not(:disabled):not(.disabled):active {
+    background-color: var(--color-primary-700);
+    border-color: var(--color-primary-700);
+    box-shadow: none;
+}
+.btn-primary:focus-visible { box-shadow: 0 0 0 3px var(--color-primary-300); }
+
+.btn-outline-primary {
+    color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+}
+.btn-outline-primary:hover {
+    background-color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+    color: #fff;
+}
+
+.text-primary { color: var(--color-primary) !important; }
+.bg-primary { background-color: var(--color-primary-600) !important; color: var(--color-on-primary) !important; }
+.border-primary { border-color: var(--color-primary-600) !important; }
+
+/* ---------- Status colors (selaras token) ---------- */
+.bg-success { background-color: var(--color-success) !important; }
+.bg-warning { background-color: var(--color-warning) !important; color:#1f2937 !important; }
+.bg-danger  { background-color: var(--color-danger)  !important; }
+.bg-info    { background-color: var(--color-info)    !important; }
+.text-success { color: var(--color-success) !important; }
+.text-warning { color: var(--color-warning) !important; }
+.text-danger  { color: var(--color-danger)  !important; }
+.text-info    { color: var(--color-info)    !important; }
+
+.badge-success { background-color: var(--color-success); }
+.badge-warning { background-color: var(--color-warning); color:#1f2937; }
+.badge-danger  { background-color: var(--color-danger); }
+.badge-info    { background-color: var(--color-info); }
+.badge-primary { background-color: var(--color-primary-600); }
+
+/* ---------- Cards (flat-modern) ---------- */
+.card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-e1);
+}
+.card-header {
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+.card-title { font-size: 1.125rem; font-weight: 600; }
+
+/* outline cards → garis atas pakai primary */
+.card-primary.card-outline { border-top: 3px solid var(--color-primary-600); }
+.card-primary:not(.card-outline) > .card-header { background-color: var(--color-primary-600); }
+
+/* ---------- Small-box (KPI) ---------- */
+.small-box { border-radius: var(--radius-md); box-shadow: var(--shadow-e1); }
+.small-box > .inner h3 { font-weight: 700; }
+
+/* ---------- Tables ---------- */
+.table thead th, .table thead.thead-light th {
+    background-color: var(--color-surface-2);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    font-size: .72rem;
+    letter-spacing: .05em;
+    border-bottom: 1px solid var(--color-border);
+}
+.table td, .table th { border-top-color: var(--color-border); }
+.table-hover tbody tr:hover { background-color: var(--color-surface-2); }
+
+/* ---------- Forms ---------- */
+.form-control {
+    border-radius: var(--radius-sm);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-300);
+}
+.form-control::placeholder { color: var(--color-text-subtle); }
+
+/* ---------- Sidebar: tint ke indigo brand agar menyatu dgn aksen halaman ---------- */
+.main-sidebar,
+.sidebar-dark-primary {
+    background-color: var(--color-primary-900);   /* #1A1A4D — Marine Blue gelap */
+}
+.brand-link {
+    background-color: var(--color-primary-900);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+/* section header (MASTER DATA, QHSE, …) sedikit lebih terang agar terbaca */
+.sidebar-dark-primary .nav-header { color: rgba(255,255,255,.5); }
+/* hover state lembut */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
+    background-color: rgba(255,255,255,.06);
+}
+/* item aktif: Marine Blue (primary-600) menonjol di atas indigo gelap */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link.active {
+    background-color: var(--color-primary-600);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+/* ---------- Navbar ---------- */
+.main-header.navbar {
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Buttons: radius konsisten ---------- */
+.btn { border-radius: var(--radius-sm); font-weight: 600; }
+
+/* ---------- Pagination ---------- */
+.page-item.active .page-link {
+    background-color: var(--color-primary-600);
+    border-color: var(--color-primary-600);
+}
+.page-link { color: var(--color-primary); }
+
+/* ============================================================
+   DARK MODE (Fase 3) — override surface struktural AdminLTE.
+   Token warna sudah flip otomatis via [data-theme="dark"] di
+   design-tokens.css; di sini hanya set background yang di-hardcode
+   AdminLTE/Bootstrap (card putih, navbar putih, input, dll).
+   ============================================================ */
+[data-theme="dark"] body,
+[data-theme="dark"] .wrapper { color: var(--color-text); }
+[data-theme="dark"] .content-wrapper { background: var(--color-bg); }
+
+/* preloader / splash screen — ikut gelap (data-theme di-set di <head> sebelum paint) */
+[data-theme="dark"] .preloader { background-color: var(--color-bg) !important; }
+
+/* navbar atas */
+[data-theme="dark"] .main-header.navbar,
+[data-theme="dark"] .navbar-white,
+[data-theme="dark"] .navbar-light { background-color: var(--color-surface) !important; }
+[data-theme="dark"] .navbar-light .nav-link,
+[data-theme="dark"] .navbar-white .nav-link { color: var(--color-text); }
+
+/* kartu & panel */
+[data-theme="dark"] .card { background: var(--color-surface); color: var(--color-text); }
+[data-theme="dark"] .card-header { background: var(--color-surface); color: var(--color-text); }
+[data-theme="dark"] .card.bg-white,
+[data-theme="dark"] .info-box,
+[data-theme="dark"] .bg-light { background-color: var(--color-surface) !important; color: var(--color-text); }
+
+/* teks utilitas */
+[data-theme="dark"] .text-muted { color: var(--color-text-muted) !important; }
+[data-theme="dark"] .text-dark  { color: var(--color-text) !important; }
+
+/* tabel */
+[data-theme="dark"] .table { color: var(--color-text); }
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th { border-color: var(--color-border); }
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) { background-color: var(--color-surface-2); }
+
+/* form */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .custom-select,
+[data-theme="dark"] select.form-control {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+[data-theme="dark"] .form-control::placeholder { color: var(--color-text-subtle); }
+[data-theme="dark"] .input-group-text { background: var(--color-surface-2); color: var(--color-text-muted); border-color: var(--color-border); }
+
+/* tombol netral */
+[data-theme="dark"] .btn-light,
+[data-theme="dark"] .btn-default,
+[data-theme="dark"] .btn-outline-secondary {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+/* dropdown, modal, breadcrumb, divider */
+[data-theme="dark"] .dropdown-menu { background: var(--color-surface); border-color: var(--color-border); }
+[data-theme="dark"] .dropdown-item { color: var(--color-text); }
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus { background: var(--color-surface-2); color: var(--color-text); }
+[data-theme="dark"] .dropdown-divider { border-color: var(--color-border); }
+[data-theme="dark"] .modal-content { background: var(--color-surface); color: var(--color-text); }
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer { border-color: var(--color-border); }
+[data-theme="dark"] .close { color: var(--color-text); text-shadow: none; }
+[data-theme="dark"] .breadcrumb { background: var(--color-surface-2); }
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-top,
+[data-theme="dark"] .border-bottom,
+[data-theme="dark"] .border-left,
+[data-theme="dark"] .border-right { border-color: var(--color-border) !important; }
+[data-theme="dark"] hr { border-top-color: var(--color-border); }
+[data-theme="dark"] .page-link { background: var(--color-surface); border-color: var(--color-border); }
+
+/* tombol toggle tema di navbar */
+.theme-toggle-link { cursor: pointer; }
+
+/* ============================================================
+   RESPONSIVE / MOBILE — agar nyaman dibuka di HP.
+   AdminLTE sudah meng-collapse sidebar otomatis; bagian ini
+   menangani tabel data (yang tidak dibungkus .table-responsive),
+   spacing, dan ukuran sentuh (min 44px).
+   ============================================================ */
+
+/* HANYA di layar kecil (tablet & HP): tabel jadi kotak yang bisa di-scroll
+   horizontal, sehingga tidak menarik lebar seluruh halaman.
+   Di laptop/desktop tabel dibiarkan normal (width:100%, semua kolom muat) —
+   jika dipaksa block, kolom kanan malah "terpotong". */
+@media (max-width: 991.98px) {
+    .content .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 767.98px) {
+    /* Cegah halaman ikut scroll ke samping karena elemen lebar */
+    .content-wrapper { overflow-x: hidden; }
+
+    /* Spacing halaman lebih ringkas di layar kecil */
+    .content { padding-left: .5rem; padding-right: .5rem; }
+    .content-header { padding: .75rem .5rem; }
+    .content-header h1 { font-size: 1.35rem; }
+
+    /* Sel tabel mode-scroll tidak membungkus → kolom rapi & tabel bisa di-scroll.
+       (Tabel mode-kartu .pklp-cardize dikecualikan, lihat di bawah.) */
+    .content .table:not(.pklp-cardize) th,
+    .content .table:not(.pklp-cardize) td { white-space: nowrap; }
+
+    /* Target sentuh nyaman (min 44px) untuk tombol & input */
+    .btn,
+    .form-control,
+    .custom-select,
+    select.form-control { min-height: 44px; }
+    .btn-sm { min-height: 38px; }
+
+    /* Grup tombol & toolbar membungkus rapi, tidak meluber */
+    .btn-group,
+    .btn-toolbar { flex-wrap: wrap; gap: .35rem; }
+
+    /* Angka KPI (small-box) tidak terpotong */
+    .small-box .inner h3 { font-size: 1.8rem; }
+
+    /* Card lebih rapat */
+    .card-body { padding: 1rem; }
+
+    /* Gambar/elemen media tidak melebihi layar */
+    img { max-width: 100%; height: auto; }
+
+    /* ---------- Tabel → tampilan KARTU di HP ----------
+       Tabel bertanda .pklp-cardize (otomatis dari responsive-tables.js):
+       tiap baris jadi 1 kartu, tiap sel tampil sebagai "Label : Nilai".
+       Jauh lebih enak dibaca daripada scroll horizontal. */
+    .content .table.pklp-cardize { overflow-x: visible; }
+    .content .table.pklp-cardize thead { display: none; }
+    .content .table.pklp-cardize tbody,
+    .content .table.pklp-cardize tr,
+    .content .table.pklp-cardize td { display: block; width: 100%; }
+
+    .content .table.pklp-cardize tr {
+        margin-bottom: .85rem;
+        padding: .15rem .9rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        box-shadow: var(--shadow-e1);
+        overflow: hidden;
+    }
+
+    .content .table.pklp-cardize td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: .6rem 0;
+        text-align: right;
+        white-space: normal;
+        word-break: break-word;
+        border: 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+    .content .table.pklp-cardize tr td:last-child { border-bottom: 0; }
+
+    .content .table.pklp-cardize td::before {
+        content: attr(data-label);
+        flex: 0 0 38%;
+        text-align: left;
+        font-weight: 600;
+        font-size: .75rem;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+        color: var(--color-text-muted);
+    }
+
+    /* Sel tanpa label (mis. kolom aksi yang tak terdeteksi) → konten rata kanan penuh */
+    .content .table.pklp-cardize td:not([data-label]) { justify-content: flex-end; }
+    .content .table.pklp-cardize td:not([data-label])::before { content: ""; flex: 0; }
+
+    /* Di mode kartu, striping AdminLTE dimatikan (tiap kartu sudah punya surface sendiri) */
+    .content .table-striped.pklp-cardize tbody tr:nth-of-type(odd) { background: var(--color-surface); }
+}
