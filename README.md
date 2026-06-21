@@ -1,58 +1,145 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PKLP — Sistem Monitoring QHSE & Fleet
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Platform monitoring terintegrasi untuk **PT. Pelayaran Karya Lentari Perdana (PKLP)** — mengelola QHSE, audit, man-hours, sertifikat kapal, maintenance, hingga management review dalam satu dashboard. Dibangun dengan **Laravel 13** + **AdminLTE 3**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Fitur
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aplikasi terbagi menjadi panel admin (perlu login) dan halaman publik.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Master Data**
+- Master Lokasi
 
-## Learning Laravel
+**Management**
+- User Management (dengan peran: Super Admin, Admin QHSE, Admin Operation)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**QHSE**
+- Man Hours
+- HSSE Statistics
+- Incident Resume
+- Annual Work Plan (+ jadwal)
+- Management Review
+- Management Visit
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+**Audit**
+- Checklist Template
+- Internal Audit (+ checklist, export PDF)
+- Audit Findings
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+**Operation**
+- Certificate Monitoring (sertifikat kapal)
+- Maintenance Checklist (+ daily check)
 
-## Agentic Development
+**Publik**
+- Landing page (hero parallax + chart live)
+- Public dashboard (KPI & analitik QHSE)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+**Lain-lain**
+- Dashboard eksekutif dengan grafik (Chart.js)
+- Export **PDF** (dompdf) & **Excel** (maatwebsite/excel)
+- Mode terang/gelap (dark mode)
+- Tampilan responsif — tabel admin otomatis jadi kartu di layar HP
+
+---
+
+## 🛠️ Teknologi
+
+| Komponen | Keterangan |
+|----------|------------|
+| Framework | Laravel 13 |
+| Bahasa | PHP 8.4 |
+| Database | MySQL |
+| UI | AdminLTE 3 (Bootstrap 4), Blade |
+| Auth | Laravel Breeze |
+| Chart | Chart.js |
+| Export | dompdf, Laravel Excel |
+
+> Tidak memakai Vite/npm — seluruh aset front-end sudah tersedia di `public/`, jadi **tidak perlu `npm install`/`npm run`**.
+
+---
+
+## 📋 Prasyarat
+
+- **PHP 8.4** (wajib — lihat `composer.json`)
+- **Composer**
+- **MySQL** (mis. lewat Laragon / XAMPP)
+
+---
+
+## 🚀 Instalasi (development)
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clone
+git clone https://github.com/rillopambudii/PKLP.git
+cd PKLP
 
-php artisan boost:install
+# 2. Install dependency PHP
+composer install
+
+# 3. Siapkan environment
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Lalu edit `.env`, sesuaikan koneksi database lokal kamu:
 
-## Contributing
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pklp
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Buat database kosong bernama `pklp` di MySQL, lalu:
 
-## Code of Conduct
+```bash
+# 4. Migrasi tabel + isi data demo (akun admin, dsb)
+php artisan migrate --seed
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# 5. Jalankan
+php artisan serve --no-reload
+```
 
-## Security Vulnerabilities
+Buka **http://127.0.0.1:8000**.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> Di Windows, gunakan `--no-reload` untuk menghindari error `Failed to listen on 127.0.0.1:8000`. Tersedia juga `serve.bat` sebagai pintasan.
 
-## License
+### Akun demo (setelah `--seed`)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Email | Password | Peran |
+|-------|----------|-------|
+| admin@pklp.com | Secret123 | Super Admin |
+
+> ⚠️ Ganti password ini sebelum dipakai di lingkungan produksi.
+
+---
+
+## 📱 Catatan tampilan
+
+- **Laptop/desktop:** tabel tampil normal, seluruh kolom muat.
+- **Tablet:** tabel bisa di-scroll horizontal.
+- **HP:** tabel otomatis berubah jadi kartu (format `Label : Nilai`) agar mudah dibaca — ditangani oleh `public/js/responsive-tables.js` + `public/css/adminlte-theme.css`, tanpa mengubah file Blade.
+
+---
+
+## ☁️ Deployment
+
+Panduan deploy ke hosting gratis (InfinityFree) tersedia di **`deploy/PANDUAN-DEPLOY-INFINITYFREE.md`**, lengkap dengan template `.env` produksi dan file pendukung.
+
+> Catatan: hosting gratis sering hanya mendukung **PHP 8.3**, sedangkan project ini disetel untuk **8.4**. Cara menurunkan dependency ke 8.3 (khusus untuk paket upload, jangan dipakai di repo tim) ada di panduan tersebut.
+
+---
+
+## 👥 Catatan untuk tim
+
+- Seluruh tim mengembangkan di **PHP 8.4** — jaga `composer.json` tetap `^8.4`.
+- Saat setup awal cukup `composer install` (jangan `composer update` sembarangan) agar versi dependency konsisten antar anggota tim.
+
+---
+
+## 📄 Lisensi
+
+Proyek internal PT. Pelayaran Karya Lentari Perdana. Hak cipta © PKLP.
