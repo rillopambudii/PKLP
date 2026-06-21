@@ -107,14 +107,6 @@ Buka **http://127.0.0.1:8000**.
 
 > Di Windows, gunakan `--no-reload` untuk menghindari error `Failed to listen on 127.0.0.1:8000`. Tersedia juga `serve.bat` sebagai pintasan.
 
-### Akun demo (setelah `--seed`)
-
-| Email | Password | Peran |
-|-------|----------|-------|
-| admin@pklp.com | Secret123 | Super Admin |
-
-> ⚠️ Ganti password ini sebelum dipakai di lingkungan produksi.
-
 ---
 
 ## 📱 Catatan tampilan
